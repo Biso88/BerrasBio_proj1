@@ -1,0 +1,47 @@
+﻿@page
+@model BerrasBio_proj1.Pages.ConfirmationModel
+@{
+    ViewData["Title"] = "Confirmation";
+}
+
+<h1>Confirmation</h1>
+<div>
+<h4>Your reciept: </h4>
+<hr />
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Booking.FirstName)
+        </dt>
+       <dd class="col-sm-10">
+           @Html.DisplayFor(model => model.Booking.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Booking.LastName)
+        </dt>
+      <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Booking.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Booking.TicketQuantity)
+        </dt>
+      <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Booking.TicketQuantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Booking.Showing.Movie.MovieTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Booking.Showing.Movie.MovieTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Booking.Showing.StartHour)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Booking.Showing.StartHour)
+        </dd>
+    </dl> 
+</div>
+<div>
+    <a asp-page="./Index">Back to the main site</a>
+</div>

@@ -1,0 +1,60 @@
+﻿@page
+@using BerrasBio_proj1.DbModel
+@model IndexModel
+@{
+    ViewData["Title"] = "Welcome to Berras bio";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Berras bio</h1>
+</div>
+
+<div class="container">
+    <div class="col-12 border">
+        <form method="post">
+            <table id="BerassTable" class="table table-striped border">
+                <thead>
+                    <tr class="table-secondary">
+                        <th>
+                            @Html.DisplayNameFor(model => Model.Showing.FirstOrDefault().Movie.MovieTitle)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => Model.Showing.FirstOrDefault().StartHour)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => Model.Showing.FirstOrDefault().RemainingSeats)
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var showing in Model.Showing)
+                    {
+                        @if (showing.RemainingSeats > 0)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => showing.Movie.MovieTitle)</td>
+                                <td>@Html.DisplayFor(modelItem => showing.StartHour)</td>
+                                <td>@Html.DisplayFor(modelItem => showing.RemainingSeats)</td>
+                                <td>
+                                    <a asp-page="AddBooking" asp-route-id="@showing.ShowingId" class="btn btn-primary btn-sm">Book me</a>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr style="color: red">
+                                <td><strong>@Html.DisplayFor(modelItem => showing.Movie.MovieTitle)</strong></td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" disabled>Fully booked</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

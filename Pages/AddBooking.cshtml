@@ -1,0 +1,59 @@
+﻿@page
+@model BerrasBio_proj1.Pages.AddBookingModel
+@{
+    ViewData["Title"] = "AddBooking";
+}
+<div>
+    <h2 class="display-4">Booking</h2>
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <div>@Html.DisplayFor(modelItem => @Model.Showing.Movie.MovieTitle)</div>
+            <div>@Html.DisplayFor(modelItem => @Model.Showing.Salon.SalonId)</div>
+            <div>@Html.DisplayFor(modelItem => @Model.Showing.StartHour)</div>
+            <br />
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Booking.FirstName" class="control-label"></label>
+                    <input asp-for="Booking.FirstName" class="form-control" />
+                    <span asp-validation-for="Booking.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Booking.LastName" class="control-label"></label>
+                    <input asp-for="Booking.LastName" class="form-control" />
+                    <span asp-validation-for="Booking.LastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                <label asp-for="Booking.TicketQuantity" class="control-label"></label>
+                <select asp-for="Booking.TicketQuantity" class="form-control">
+                    @for (int tickets = 1; tickets <= Model.Showing.RemainingSeats; tickets++)
+                        {
+                            <option>@tickets</option>
+                        }
+                </select>
+                <span asp-validation-for="Booking.TicketQuantity" class="text-danger"></span>
+                </div>
+
+                @*<div class="form-group">
+                    <label asp-for="Booking.TicketQuantity" class="control-label"></label>
+                    <select asp-for="Booking.TicketQuantity" class="form-control">
+                        @for (int tickets = 1; tickets <= Math.Clamp(Model.Showing.RemainingSeats, 1, 12); tickets++)
+                        {
+                            <option>@tickets</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Booking.TicketQuantity" class="text-danger"></span>
+                </div>*@
+                <div class="form-group">
+                    <input type="submit" value="Book" class="btn btn-success" />
+                    <a asp-page="Index" class="btn btn-primary">Back to main menu</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

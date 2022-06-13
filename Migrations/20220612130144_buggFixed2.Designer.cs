@@ -4,6 +4,7 @@ using BerrasBio_proj1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BerrasBio_proj1.Migrations
 {
     [DbContext(typeof(BerrasBio_proj1Context))]
-    partial class BerrasBio_proj1ContextModelSnapshot : ModelSnapshot
+    [Migration("20220612130144_buggFixed2")]
+    partial class buggFixed2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,7 +95,7 @@ namespace BerrasBio_proj1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShowingId"), 1L, 1);
 
-                    b.Property<int?>("MovieId")
+                    b.Property<int>("MovieId")
                         .HasColumnType("int");
 
                     b.Property<int>("RemainingSeats")
@@ -129,7 +131,9 @@ namespace BerrasBio_proj1.Migrations
                 {
                     b.HasOne("BerrasBio_proj1.DbModel.Movie", "Movie")
                         .WithMany("Showings")
-                        .HasForeignKey("MovieId");
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BerrasBio_proj1.DbModel.Salon", "Salon")
                         .WithMany("Showings")

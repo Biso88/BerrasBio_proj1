@@ -2,7 +2,7 @@
 
 namespace BerrasBio_proj1.DbModel
 {
-    public partial class Movie
+    public class Movie
     {
         [Key]
         public int MovieId { get; set; }
@@ -11,7 +11,7 @@ namespace BerrasBio_proj1.DbModel
         [Display(Name = "Movie title")]
         public string MovieTitle { get; set; }
 
-        public virtual ICollection<Showing> Showings { get; set; } = new List<Showing>();
+        public virtual ICollection<Showing> Showings { get; set; }
 
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BerrasBio_proj1.DbModel
 {
-    public partial class Salon
+    public class Salon
     {
         [Key]
         public int SalonId { get; set; }

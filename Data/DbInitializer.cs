@@ -4,71 +4,69 @@ namespace BerrasBio_proj1.Data
 {
     public class DbInitializer
     {
-        public static async Task Initialize(BerrasBio_proj1Context context)
+        public static async Task Initialize(BerrasBio_proj1Context _context)
         {
-            if (context.Movie.Any())
+
+            if (_context.Movie.Any())
             {
-                return;
+                return;   // DB has been seeded
             }
+            _context.Movie.AddRange
+            (
+                new Movie
+                {
+                    MovieTitle = "Infinity War"
+                },
+                new Movie
+                {
+                    MovieTitle = "Spider man"
+                },
+                new Movie
+                {
+                    MovieTitle = "Thor"
+                }
+            );
 
-            context.Showing.AddRange(
-               new Showing
-               {
-                   MovieId = 1,
-                   SalonId = 1,
-                   StartHour = DateTime.Parse("2022-05-30 15:00"),
-                   RemainingSeats = 50,
-               },
-
-               new Showing
-               {
-                   MovieId = 2,
-                   SalonId = 1,
-                   StartHour = DateTime.Parse("2022-05-30 18:00"),
-                   RemainingSeats = 50,
-               },
-
-               new Showing
-               {
-                   MovieId = 3,
-                   SalonId = 1,
-                   StartHour = DateTime.Parse("2022-05-30 21:00"),
-                   RemainingSeats = 50,
-               });
-
-            context.Movie.AddRange(
-               new Movie
-               {
-                   MovieTitle = "Infinity War"
-               },
-               new Movie
-               {
-                   MovieTitle = "Spider man"
-               },
-               new Movie
-               {
-                   MovieTitle = "Thor"
-               });
-
-            context.Salon.AddRange(
+            if (_context.Salon.Any())
+            {
+                return;   // DB has been seeded
+            }
+            _context.Salon.AddRange(
                 new Salon
                 {
                     SalonSize = 50
                 });
 
-            context.Booking.AddRange(
-                new Booking 
-                { FirstName = "Bassam", 
-                    LastName = "AL-Nashi", 
-                    TicketQuantity = 2 },
+            if (_context.Showing.Any())
+            {
+                return;   // DB has been seeded
+            }
+            _context.Showing.AddRange(
+                new Showing
+                { 
+                    SalonId = 1,
+                    RemainingSeats = 50,
+                    StartHour = DateTime.Today.AddHours(16)
 
-                new Booking 
-                { FirstName = "Claes", 
-                    LastName = "Engelin", 
-                    TicketQuantity = 5 });
+                },
 
-               await context.SaveChangesAsync();
+                new Showing
+                {
+                    SalonId = 1,
+                    RemainingSeats = 50,
+                    StartHour = DateTime.Today.AddHours(18)
+
+                },
+                new Showing
+                {
+                    SalonId = 1,
+                    RemainingSeats = 50,
+                    StartHour = DateTime.Today.AddHours(21)
+
+                }
+                );
+            _context.SaveChanges();
+
         }
-        
     }
 }

@@ -16,26 +16,28 @@ namespace BerrasBio_proj1.Pages
         }
 
         [BindProperty]
-        public Booking Booking { get; set; } = new Booking();
+        public Booking Booking { get; set; } = default!;
 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (_context.Booking != null)
-            {
-                var _booking = await _context.Booking.FirstOrDefaultAsync(m => m.BookingId == id);
-                if (_booking != null)
-                {
-                    Booking = _booking;
-                    _booking = await _context.Booking
-                        .Include(s => s.Showing)
-                        .FirstAsync(x => x.ShowingId == _booking.ShowingId);
-                }
 
+            if (id == null || _context.Booking == null)
+            {
+                return NotFound();
+            }
+
+            var _booking1 = await _context.Booking
+                         .Include(s => s.Showing)
+                         .FirstAsync(m => m.BookingId == id);
+
+            if (_booking1 == null)
+            {
+                return NotFound();
             }
             else
             {
-                return NotFound("");
+                Booking = _booking1;
             }
 
             return Page();

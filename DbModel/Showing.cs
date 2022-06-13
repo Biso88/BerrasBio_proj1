@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BerrasBio_proj1.DbModel
 {
-    public partial class Showing
+    public class Showing
     {
         [Key]
         public int ShowingId { get; set; }
@@ -14,15 +14,12 @@ namespace BerrasBio_proj1.DbModel
         [Display(Name = "Starting From")]
         public DateTime StartHour { get; set; }
 
-
         public Movie? Movie { get; set; }
-        public int MovieId { get; set; }
-
 
         public Salon? Salon { get; set; }
         public int SalonId { get; set; }
 
-        public virtual ICollection<Booking>? Bookings { get; set; }
+        public ICollection<Booking>? Bookings { get; set; }
 
     }
 }

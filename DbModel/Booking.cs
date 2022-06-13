@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BerrasBio_proj1.DbModel
 {
@@ -19,8 +20,7 @@ namespace BerrasBio_proj1.DbModel
         [Range (1, 12)]
         public int TicketQuantity { get; set; }
 
-
-        public virtual Showing? Showing { get; set; }
+        public Showing? Showing { get; set; }
         public int ShowingId { get; set; }
 
     }

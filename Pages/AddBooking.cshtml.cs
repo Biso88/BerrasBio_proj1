@@ -60,13 +60,14 @@ namespace BerrasBio_proj1.Pages
                 Showing = showing,
                 FirstName = Booking.FirstName,
                 LastName = Booking.LastName,
-                TicketQuantity = Booking.TicketQuantity
+                TicketQuantity = Booking.TicketQuantity,
             };
 
             _context.Booking.Add(booking);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("Confirmation", id == booking.BookingId);
+
+            return RedirectToPage("Confirmation", new { id = booking.BookingId });
         }
     }
 }
